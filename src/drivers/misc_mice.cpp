@@ -521,9 +521,10 @@ void PollDeluxM800(PollContext& ctx) {
             if (st == 2) {
                 s.percent = 100;
                 s.charging = true;
+                s.full = true;
             } else if (st == 1) {
                 s.charging = true;
-                if (s.connected && pct > 0) s.percent = Clamp100(pct);
+                // The mouse reports r[18] = 100 (0x64) while charging (the vendor app hides % for state 1).
             } else if (s.connected && pct > 0) {
                 s.percent = Clamp100(pct);
             }
